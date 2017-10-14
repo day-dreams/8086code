@@ -11,9 +11,9 @@ extra ends
 
 
 code segment
-main proc far
+main proc far;以proc声明,所以要准备返回地址
     assume      cs:code,ds:data,es:extra
-start:
+start:;声明整个程序的开始
     ; 设置返回堆栈
     push ds
     sub ax,ax
