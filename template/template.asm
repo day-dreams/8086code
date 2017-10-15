@@ -19,6 +19,12 @@ start:;声明整个程序的开始
     sub ax,ax
     push ax
 
+    ;设置ds，es
+    mov ax,data
+    mov ds,ax
+    mov ax,extra
+    mov es,ax
+
     ; 在这里插入你的代码
 
     mov ax,1010H
