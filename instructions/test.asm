@@ -36,11 +36,9 @@ start:
     mov ax,0
     push ax
 
-    ; you must set ds,es,ss before use them, or you may modify something terrible!!!
+    ; you must set ds,es（but not ss） before use them, or you may modify something terrible!!!
     mov ax,data
     mov ds,ax
-    mov ax,stack
-    mov ss,ax
     mov ax,extra
     mov es,ax
 
@@ -59,8 +57,8 @@ start:
 
 
     ; test 1, mov 5678H to ds:0
-    mov ax,5678H
-    mov ds:0000H,ax
+    ; mov ax,5678H
+    ; mov ds:0000H,ax
 
     ; test 2, push 1234 from ax and pop it to bx
     ; mov ax,1234H
