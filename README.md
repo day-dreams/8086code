@@ -7,8 +7,4 @@
 * [ppt上的一个字符串复制例子](demo)
 * [指令测试](instructions)
 * [一个标准的汇编代码模板](template)  
-
-
-一些细节：
-
-* 文件名太长在dosbox中显示不出来
+* [第一次实验代码](experiments)
