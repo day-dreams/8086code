@@ -1,38 +1,29 @@
-title homework1
+title work1_of_5
 
-;data
-data segment
-    pa dw ?
-    nn db 16 dup(?)
-    co dd ?
-    le equ $-pa
-    _test db 'a'
-    _le equ $-pa
-    
-data ends
-
-
-extra segment
-
-extra ends
-
+;;; cx*10=cx<<3+cx<<1
 
 code segment
 main proc far
-    assume ds:data,es:extra,cs:code
+    assume cs:code
 start:
     push ds
-    mov ax,0
+    sub ax,ax
     push ax
 
-    ;;insert code[ 
+    ;;;
+    mov cx,8
 
-    mov ax,le
-    mov bx,_le
+    mov ax,cx
+    mov bx,cx
 
+    mov cl,3
+    shl ax,cl
+    mov cl,1
+    shl bx,cl
+    add ax,bx
+    mov cx,ax
 
-    ;;insert code]
-
+    ;;;
 
     ret
 
