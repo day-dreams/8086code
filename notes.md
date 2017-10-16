@@ -15,6 +15,9 @@
 * loop指令
     loop并不好用，特别是在多重循环的时候。
 
+* 根据两个数的带小来跳转
+    注意区分有符号和无符号数。对应的指令不同(ja,jb;jg,jl)
+
 # flags
 
 ![](pictures/debug-flags.png)
