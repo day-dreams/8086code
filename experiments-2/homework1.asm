@@ -1,11 +1,11 @@
 title homework1
 
 ;;;
-;;; input a char(hex number),output it(binary number)
+;;; input 4 char(hex number),output it(binary number)
 ;;;
 
 data segment
-
+    num dw 0
 data ends
 
 
@@ -18,21 +18,50 @@ code segment
 
 ; proc main
 main proc far
-    assume cs:code,ss:stack
+    assume cs:code,ss:stack,ds:data
 start:
     push ds
     mov ax,0
     push ax
 
+    mov ax,data
+    mov ds,ax
+
     ;;;[
 
     mov ax,0    ;init
 
-    mov ah,1    ;input a char[0,F]
+    mov cx,4
+
+loop_input:
+    mov ah,1    ;input a char[0,F] into al
     int 21H
 
-    ; mov al,'3'
+    mov bl,al
+    push cx
+    call asii2hex
+    pop cx
+    mov ax,16
+    mul num
+    mov ds:num,ax
+    add word ptr ds:num,bl
+loop loop_input
 
+    ; mov ds:num,8888H
+    push ds:num
+    call print_binary_stack
+    pop ds:num
+    ;;;]
+
+    ret
+main endp
+
+
+; proc asii2hex
+; parameter is at bl, return value is at bl too.
+asii2hex proc near
+
+    mov al,bl
     cmp al,'0'  ;jump if <'0'
     jl ERROR_INPUT        
 COND_1:
@@ -53,20 +82,14 @@ COND_3:
     add al,10d
     jmp PRINT_AX
     
-PRINT_AX:
-    mov ah,0
-    push ax     ;print it in binary mode
-    call print_binary_stack
-    pop ax
-
 ERROR_INPUT:
-
-    ;;;]
+    mov al,0
+PRINT_AX:
+    mov bl,al
 
     ret
-main endp
 
-
+asii2hex endp
 
 ; proc PRINT* print '\n' , then first data(16bits) in stack in binary mode,
 ; this will pop stack, and may modify registers.
@@ -84,7 +107,10 @@ print_binary_stack proc near
     mov bp,sp
     mov ax,ss:[bp+2]    ;NOTE:near调用，call只push了一个ip，占用2字节
 
-    mov cx,17
+    ; mov bx,cx
+    rcl ax,1    ;预设好循环移位
+
+    mov cx,16
 
 PRINT_LOOP:;用于输出ax的循环
     rcl ax,1
