@@ -1,5 +1,8 @@
 title homework1
 
+;;;
+;;; input a char(hex number),output it(binary number)
+;;;
 
 data segment
 
