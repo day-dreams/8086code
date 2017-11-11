@@ -15,7 +15,7 @@
 
 * [第二次实验代码](experiments-2)
 
-* [自定义中断例子](interrpts/example1.asm)
+* [自定义中断例子](interrupts/example1.asm)
 
 
 真是服了这种没人用的老东西,现在的程序还是要多写啊.
