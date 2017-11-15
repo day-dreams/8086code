@@ -37,6 +37,11 @@ start:
     mov cx,array_len    
     call find_max_min
 
+    ;;; Dont Suggest!
+    ; mov si,3000H
+    ; mov cx,8H
+    ; call find_max_min
+
     ;;;]
 
 

@@ -5,7 +5,7 @@ title work3
 ;;;
 
 data segment
-    num dd 00000001H
+    num dd 98765432H
 data ends
 
 
