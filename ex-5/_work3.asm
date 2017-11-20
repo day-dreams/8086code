@@ -3,9 +3,9 @@ title 4x4键盘扫描
 ;;;程序来源 http://www.doc88.com/p-775898015007.html
 
 ;;; port address
-MY8255_A EQU   0600H
-MY8255_B EQU   0602H
-MY8255_C EQU   0604H
+MY8255_A EQU   0600H    ;OUTPUT,0
+MY8255_B EQU   0602H    ;OUTPUT,0
+MY8255_C EQU   0604H    ;[OUTPUT,INPUT]
 MY8255_CON EQU 0606H
 
 
@@ -57,8 +57,8 @@ INK1:
     CALL DALLY
     CALL CLEAR
     CALL CCSCAN
-    JNZ INK2
-    JMP BEGIN
+    JNZ INK2        ;有键按下
+    JMP BEGIN       ;无键按下
 
 INK2:
     MOV CH,0FEH
@@ -116,7 +116,7 @@ KERR:
     JMP BEGIN
 
 ;SUB PROCS
-CCSCAN:
+CCSCAN:             ;读列数据al，al :=  !al & 0FH 
     MOV AL,00H
     MOV DX,MY8255_A
     OUT DX,AL
@@ -126,7 +126,7 @@ CCSCAN:
     AND AL,0FH
     RET
 
-CLEAR:
+CLEAR:              ;熄灭所有数码管
     MOV DX,MY8255_B
     MOV AL,00H
     OUT DX,AL
@@ -161,7 +161,7 @@ OUT1:
     POP AX
     RET
 
-DALLY:
+DALLY:          ;延时
     PUSH CX
     MOV CX,0006H
 T1:
@@ -173,7 +173,7 @@ T2:
     POP CX
     RET
 
-PUTBUF:
+PUTBUF:         ;把al存入放入[di]，di在[3000H,3005H]间循环移动
     MOV SI,DI
     MOV [SI],AL
     DEC DI
