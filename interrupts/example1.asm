@@ -39,8 +39,8 @@ start:
     ;;;[
 
     mov ax,InterruptProgram     ;set interrupt table
-    mov word ptr es:[30*4],0    ;modify segment addr
-    mov word ptr es:[30*4+2],ax ;modify offset addr
+    mov word ptr es:[30*4],0    ;modify offset addr
+    mov word ptr es:[30*4+2],ax ;modify segment addr
 
     
     BEGIN:
